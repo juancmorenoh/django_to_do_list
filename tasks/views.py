@@ -7,7 +7,19 @@ from tasks.models import Task
 
 
 def task_list(request):
-    tasks = Task.objects.all()  # Get all tasks from the database
+    #handle form submission
+    if request.method == 'POST':
+        #loop through all tasks
+        for task in Task.objects.all():
+            #Check if the task was checked in the form
+            task_checkbox_name = f"task_{task.id}"#Check formatting again
+            if task_checkbox_name in  request.POST:
+                task.completed = True
+            else:
+                task.completed = False
+            task.save()
+        
+    tasks = Task.objects.all()
     return render(request, 'tasks/task_list.html', {'tasks': tasks})
 
 def add_task(request):
