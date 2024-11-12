@@ -8,14 +8,16 @@
 </head>
 <body>
     <h1>To-Do List</h1>
-    <a href="{% url 'add_task' %}">Add a New Task</a>
+    <a href="{% url 'add_task' %}">Add a New Task</a> <!--link that takes you to url of add task-->
+    
     <ul>
         <form method="POST" action="{% url 'task_list' %}"> 
             {% csrf_token %}
             <ul> <!--This creates the bullet points in the list-->
                 {% for task in tasks %}
-                <li>   
-                    {{ task.title }} - {% if task.completed %}Completed{% else %}Pending{% endif %}
+                <li>
+                    <!--Check what url detail_task refers to, view(function) or what?-->   
+                    <a href="{% url 'detail_task' task_id=task.id %}">{{ task.title }}</a> - {% if task.completed %}Completed{% else %}Pending{% endif %}
                     <input type="checkbox" name="task_{{ task.id }}" {% if task.completed %}checked{% endif %}>
                 </li>
             {% endfor %}

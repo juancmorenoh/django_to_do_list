@@ -1,4 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404
+
 
 from tasks.forms import TaskForm
 from tasks.models import Task
@@ -32,3 +35,8 @@ def add_task(request):
         form = TaskForm()  # Empty form for GET request
 
     return render(request, 'tasks/add_task.html', {'form': form})
+
+def detail_task(request,task_id):
+    task = get_object_or_404(Task,id = task_id) #ASK why it has to be id= task_id
+
+    return render(request, 'tasks/detail_task.html', {'task':task})

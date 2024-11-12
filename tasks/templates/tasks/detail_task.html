@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task detail</title>
+</head>
+<body>
+    <h1>This is a page to view the details of task {{task.title}} -{{task.id}} </h1>
+    <h3>Description:</h3>
+    <p>{{task.description}}</p>
+
+    <p>Created: <i>{{task.created_at}}</i></p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'task_list' %}">Back to Task List</a>
+</body>
+</html>
