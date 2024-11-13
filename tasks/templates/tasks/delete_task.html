@@ -1,0 +1,22 @@
+<!-- tasks/templates/tasks/add_task.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete task</title>
+</head>
+<body>
+    <h1>Are you sure you want to delete the task: "{{ task.title }}"?</h1>
+    <p>This action cannot be undone!</p>
+    
+    <!-- Form to delete the task -->
+    <form method="POST" action="{% url 'delete_task' task.id %}">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    
+    <!-- Link to cancel -->
+    <a href="{% url 'task_list' %}">No, Go Back</a>
+</body>
+</html>

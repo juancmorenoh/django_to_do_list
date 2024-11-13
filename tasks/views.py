@@ -40,3 +40,13 @@ def detail_task(request,task_id):
     task = get_object_or_404(Task,id = task_id) #ASK why it has to be id= task_id
 
     return render(request, 'tasks/detail_task.html', {'task':task})
+
+def delete_task(request,task_id):
+    task = get_object_or_404(Task,id = task_id) #ASK why it has to be id= task_id
+    if request.method == 'POST':
+        task.delete()
+        return redirect('task_list') 
+    return render(request, 'tasks/delete_task.html', {'task': task})
+   
+
+
