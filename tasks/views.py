@@ -49,4 +49,8 @@ def delete_task(request,task_id):
     return render(request, 'tasks/delete_task.html', {'task': task})
    
 
-
+def reset(request):
+    if request.method == 'POST':
+        Task.objects.all().delete()
+        return redirect('task_list')
+    return render(request, 'tasks/reset.html')
